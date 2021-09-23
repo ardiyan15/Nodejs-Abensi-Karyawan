@@ -1,0 +1,50 @@
+<%- include('../layouts/header.ejs') -%>
+<%- include('../layouts/navigation.ejs') -%>
+<div class="ml-4 mr-3 mt-3">
+    <a href="/addUser" class="btn btn-primary btn-sm">Tambah Data</a>
+    <div class="card p-3 shadow-lg mb-5 rounded">
+        <table class="table" id="myTable">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th class="text-center" scope="col">Fullname</th>
+                <th class="text-center" scope="col">Username</th>
+                <th class="text-center" scope="col">Role</th>
+                <th class="text-center" scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% let i = 1 %>
+                <% for(let user of users) { %>
+                    <tr>
+                        <th class="text-center" scope="row"><%- i -%></th>
+                        <td class="text-center"><%- user.fullname -%></td>
+                        <td class="text-center"><%- user.username -%></td>
+                        <td class="text-center"><%- user.role -%></td>
+                        <td class="text-center">
+                            <form action="/delete" method="POST">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="hidden" name="id" value="<%- user.id -%>">
+                                <div class="row">
+                                    <a href="/editUser/<%- user.id -%>" class="btn btn-info btn-sm">Edit</a>
+                                    <button onclick="confirm('Ingin menghapus data?')" class="button-delete btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                <% i++ %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% if(message.info) { %>
+    <script>
+        Swal.fire(
+            'Berhasil',
+            'Berhasil menambahkan user baru',
+            'success'
+            )
+    </script>
+<% } %>
+<%- include('../layouts/footer.ejs') -%>

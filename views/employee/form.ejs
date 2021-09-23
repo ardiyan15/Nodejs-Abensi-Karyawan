@@ -1,0 +1,40 @@
+<%- include('../layouts/header.ejs') -%>
+<%- include('../layouts/navigation.ejs') -%>
+<div class="ml-4 mr-4 mt-3">
+    <div class="card p-3 shadow-lg mb-5 rounded">
+      <h2><%- title -%></h2>
+      <% if(title === 'Edit Karyawan') { %>
+        <form action="/updateEmployee" method="POST" >
+     <% } else { %>
+        <form action="/saveEmployee" method="POST" >
+      <% } %>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="id" value="<%- employee.id || '' %> ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="nik">NIK</label>
+                      <input type="text" name="nik" class="form-control" id="nik"  placeholder="NIK" value="<%- employee.nik || '' -%>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="fullname">Fullname</label>
+                      <input type="text" name="fullname" class="form-control" id="fullname" placeholder="fullname" value="<%- employee.fullname || '' -%>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="division">Division</label>
+                      <input type="text" name="division" class="form-control" id="division" placeholder="division" value="<%= employee.division || '' %>">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            <a href="/employee" class="btn btn-danger btn-sm">Cancel</a>
+          </form>
+    </div>
+</div>
+<%- include('../layouts/footer.ejs') -%>
+
+ 

@@ -1,0 +1,41 @@
+<%- include('../layouts/header.ejs') -%>
+<%- include('../layouts/navigation.ejs') -%>
+<div class="ml-4 mr-3 mt-3">
+    <a href="/addEmployee" class="btn btn-primary btn-sm">Tambah Data</a>
+    <div class="card p-3 shadow-lg mb-5 rounded">
+        <table class="table" id="myTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col">NIK</th>
+                    <th class="text-center" scope="col">Fullname</th>
+                    <th class="text-center" scope="col">Division</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let i = 1 %>
+                <% for(let employee of employees) { %>
+                    <tr>
+                        <th scope="row"><%= i %></th>
+                        <td><%= employee.nik %></td>
+                        <td><%= employee.fullname %></td>
+                        <td><%= employee.division %></td>
+                        <td>
+                            <form action="/deleteEmployee" method="POST">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="hidden" name="id" value="<%- employee.id -%>">
+                                <div class="row">
+                                    <a href="/editEmployee/<%- employee.id -%>" class="btn btn-info btn-sm">Edit</a>
+                                    <button onclick="confirm('Ingin menghapus data?')" class="button-delete btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                <% i++ %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%- include('../layouts/footer.ejs') -%>

@@ -1,0 +1,57 @@
+<%- include('../layouts/header.ejs') -%>
+<%- include('../layouts/navigation.ejs') -%>
+<div class="ml-4 mr-4 mt-3">
+    <div class="card p-3 shadow-lg mb-5 rounded">
+      <h2><%- title -%></h2>
+      <% if(title === 'Edit User') { %>
+        <form action="/update" method="POST" >
+     <% } else { %>
+        <form action="/save" method="POST" >
+      <% } %>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="id" value="<%- user.id || '' %> ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="fullname">Fullname</label>
+                      <input type="text" name="fullname" class="form-control" id="fullname"  placeholder="Fullname" value="<%- user.fullname || '' -%>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<%- user.username || '' -%>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="password">Password</label> <% if(title === 'Edit User') {%><small>(Isi password jika ingin mengubah)</small> <% } %>
+                      <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <% if(user) { %>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="role">Role</label>
+                        <select class="custom-select" name="role">
+                          <option>--Pilih Role--</option>
+                          <% for(let role of roles) { %>
+                            <% if(user.role === role.value) { %>
+                              <option value="<%- role.value -%>" selected><%- role.name -%></option>
+                            <% } else { %>
+                              <option value="<%- role.value -%>"><%- role.name -%></option>
+                            <% } %>
+                          <% } %>
+                        </select>
+                      </div>
+                  </div>
+                <% } %>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            <a href="/users" class="btn btn-danger btn-sm">Cancel</a>
+          </form>
+    </div>
+</div>
+<%- include('../layouts/footer.ejs') -%>
+
+ 

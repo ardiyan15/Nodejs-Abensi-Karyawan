@@ -1,0 +1,69 @@
+<div class="sidebar" data-color="purple" data-background-color="white" data-image="/assets/img/sidebar-1.jpg">
+  
+      <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
+          Creative Tim
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <% if(active === 'dashboard') { %>
+            <li class="nav-item active ">
+              <% } else { %>
+            <li class="nav-item ">
+              <% } %>
+            <a class="nav-link" href="/">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/profile">
+              <i class="material-icons">person</i>
+              <p>My Profile</p>
+            </a>
+          </li>
+          <% if(active === 'user') { %>
+            <li class="nav-item active ">
+          <% } else { %>
+            <li class="nav-item ">
+          <% } %>
+            <a class="nav-link" href="/users">
+              <i class="material-icons">content_paste</i>
+              <p>List User</p>
+            </a>
+          </li>
+          <% if(active === 'Karyawan') { %>
+            <li class="nav-item active ">
+          <% } else { %>
+            <li class="nav-item ">
+          <% } %>
+            <a class="nav-link" href="/employee">
+              <i class="material-icons">content_paste</i>
+              <p>List Karyawan</p>
+            </a>
+          </li>
+          <% if(active === 'absensi') { %>
+            <li class="nav-item active ">
+          <% } else { %>
+            <li class="nav-item ">
+          <% } %>
+            <a class="nav-link" href="./absensi">
+              <i class="material-icons">library_books</i>
+              <p>Abesnsi</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="./icons.html">
+              <i class="material-icons">bubble_chart</i>
+              <p>Report</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/logout">
+              <i class="material-icons">bubble_chart</i>
+              <p>Logout</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
